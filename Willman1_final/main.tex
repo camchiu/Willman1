@@ -1,0 +1,586 @@
+% \documentclass[twocolumn,twocolappendix,linenumbers]{aastex6}
+\documentclass[twocolumn,twocolappendix,linenumbers]{aastex701}
+
+%\pdfoutput=1 %for arXiv submission
+\usepackage{amsmath,amstext}
+\usepackage[T1]{fontenc}
+\usepackage{txfonts} %use times font for math
+\usepackage[figure,figure*]{hypcap} %Figure refs go figures
+
+\renewcommand*{\sectionautorefname}{Section} %for \autoref
+\renewcommand*{\subsectionautorefname}{Section} %for \autoref
+
+% live hyperlink in the output document / setting up bib
+\usepackage{hyperref}
+%\hypersetup{colorlinks=true, citecolor=blue}
+\hypersetup{colorlinks=true, linkcolor=blue, filecolor=blue, urlcolor=blue}
+
+% create grid of graphs
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[export]{adjustbox}
+\usepackage{float}
+
+% measurement values
+\newcommand*{\kms}{\, km\,s$^{-1}$}
+\newcommand{\Msun}{\mbox{\, $M_{\odot}$}}
+\newcommand{\Lsun}{\mbox{\, $L_{\odot}$}}
+\newcommand{\rell}{\, r_{\rm half,ell}}
+
+\newcommand{\ntot}{{\color{red} 57~}}
+\newcommand{\nmem}{49~}
+\newcommand{\nmix}{{\color{red} 65~}}
+
+\newcommand{\vsys}{-13.0^{+1.1}_{-1.1}}
+\newcommand{\vdisp}{4.7^{+1.5}_{-1.3}}
+\newcommand{\mass}{\color{red}5.9^{+3.7}_{-3.4} \times 10^5}
+\newcommand{\ml}{\color{red} 660 \pm 590}
+
+\newcommand{\pmra}{\color{red} 0.299 \pm 0.052}
+\newcommand{\pmdec}{\color{red} -1.097 \pm 0.075}
+
+\newcommand{\met}{\color{red} -2.45^{+0.12}_{-0.13}}
+\newcommand{\metdisp}{\color{red} 0.30^{+0.15}_{-0.11}}
+
+\newcommand{\rapo}{43.2^{+0.5}_{-0.5}}
+\newcommand{\rperi}{14.7^{+1.9}_{-1.6}}
+\newcommand{\e}{0.49^{+0.04}_{-0.05}}
+
+\newcommand{\putcomment}[3]{{\bf\color{#2} [#1: #3]}}
+\newcommand{\mg}{\putcomment{MG}{violet}}
+\newcommand{\cc}{\putcomment{CC}{teal}}
+
+\shorttitle{Willman 1}
+\shortauthors{Chiu et al.}
+
+\begin{document}
+
+\title{Willman 1 Revisited: The Kinematics, Chemistry, and Orbital Properties of a Potentially-Disrupting Dwarf Galaxy}
+
+\author[0000-0001-5915-4264]{Camille~Chiu}
+\affiliation{Department of Astronomy, Yale University, New Haven, CT 06520, USA}
+\email{camille.chiu@yale.edu}
+
+\author[0000-0002-7007-9725]{Marla~Geha}
+\affiliation{Department of Astronomy, Yale University, New Haven, CT 06520, USA}
+\email{marla.geha@yale.edu}
+
+\author[0000-0003-1697-7062]{William~Cerny}
+\affiliation{Department of Astronomy, Yale University, New Haven, CT 06520, USA}
+\email{william.cerny@yale.edu}
+
+\author[0000-0002-3204-1742]{Nitya~Kallivayalil}
+\affiliation{Department of Astronomy, University of Virginia, Charlottesville, VA 22904, USA}
+\email{njk3r@virginia.edu}
+
+\author[0000-0002-3188-2718]{Hannah~Richstein}
+\affiliation{Department of Astronomy, University of Virginia, Charlottesville, VA 22904, USA}
+\email{hr8jz@virginia.edu}
+
+\author[0000-0001-9061-1697]{Christopher T. Garling}
+\affiliation{Department of Astronomy, University of Virginia, Charlottesville, VA 22904, USA}
+\email{bwillman@lsst-da.org}
+
+\author[0000-0003-2892-9906]{Beth Willman}
+\affiliation{LSST Discovery Alliance, 933 North Cherry Avenue, Tucson, AZ 85719, USA}
+\email{bwillman@lsst-da.org}
+
+\begin{abstract}
+
+The ultra-faint Milky Way satellite Willman 1 (W1; $M_V = -2.6$; $r_{\rm half} \sim27$ pc) was the first stellar over-density found via resolved stars in the Sloan Digital Sky Survey, yet its classification as a dwarf galaxy or star cluster remains ambiguous. {\color{red} Using} new Keck/DEIMOS spectroscopy, {\it HST/ACS} photometry, and orbital {\color{red} modeling}, we re-examine the nature of W1. {\color{red} From} our updated member sample of \ntot stars, we find that past analyses included {\color{red} four} binaries and {\color{red} seven} non-members, {\color{red} identified using} {\it Gaia} proper motions {\color{red} and updated velocities}. We continue to find a velocity dispersion consistent with previous analyses, measuring $\sigma_v = \vdisp$ \kms\ from \nmem stars out to $3r_{\rm half}$. If W1 is in equilibrium, this suggests a dynamical mass of $\mass \Msun$ and mass-to-light ratio of $(M/L)_V = \ml$. Based on Ca II triplet measurements, we estimate an iron abundance of [Fe/H] $= \met$ and metallicity dispersion of $\sigma_{\rm [Fe/H]} = \metdisp$ dex. We confirm that W1 does not exhibit mass segregation inside $\sim1~r_{\rm half}$. Our best-fit orbital model predicts that W1 is at apocenter, implying that W1 has been closer to the Milky Way in the recent past with a pericentric passage $\lesssim 25$ kpc from the Galactic center $\sim0.3$ Gyr ago. Given its internal kinematics, metallicity spread, and lack of mass segregation, we conclude that W1 is a galaxy. However, given its {\color{red} orbit} and structural properties, which suggest that W1 might be tidally disrupted, as well as the difficulty in identifying a pure member sample, we caution that the measured internal velocity dispersion may not accurately reflect the dynamical mass of this system.
+\end{abstract}
+\keywords{Dwarf galaxies --- Stellar kinematics --- Milky Way dynamics}
+
+\section{Introduction}
+
+The advent of wide-field photometric surveys such as the Sloan Digital Sky Survey (SDSS) and the Dark Energy Survey (DES) {\color{red} has led to the rapid discovery of several dozen Milky Way satellite galaxies, including populations of ultra-faint dwarf galaxies and ultra-faint star clusters} \citep[e.g.,][]{Willman2005, Belokurov2007, Drlica2015, Koposov2015, Torrealba2016, Homma2024, Cerny2024}.   The faintest and most compact of these stellar systems, with stellar masses of only a few hundred solar masses and half-light radii of only tens of parsecs, blur the line between globular clusters and dwarf galaxies \citep[e.g.,][]{Smith2024}.    The classification of an object as a dwarf galaxy or star cluster typically hinges on one or both of the following diagnostics \citep{willman2012}: (1) a kinematic distribution that cannot be explained solely by its baryonic component, implying the presence of large quantities of dark matter; (2) a spectroscopically observed spread in [Fe/H] metallicity, indicating multiple epochs of star formation.   Beyond these two criteria, the presence of mass segregation has also been {\color{red} proposed} as a discriminator \citep{baumgardt2022}.
+
+{\color{red} One such system that straddles the boundary between dwarf galaxies and globular clusters is the Milky Way satellite Willman 1 (W1; SDSSJ1049+5103). W1 was first identified as an over-density of old, metal-poor stars in SDSS DR2 by \cite{Willman2005} and was the lowest luminosity galaxy known at the time of discovery \citep[$M_V = -2.5$;][]{Willman2005}.} Despite tentative evidence for mass segregation, \cite{willman2006} initially leaned towards a dwarf galaxy classification for W1 based on an observed metallicity spread between three red giant branch (RGB) stars. This classification was supported by Keck/DEIMOS spectroscopy by \cite{Martin2007}, who identified seven RGB members with a significant metallicity spread. However, follow-up spectroscopy from the Hobby-Eberly Telescope by \cite{Siegel2008} determined that at least two and up to five of these identified RGB stars were likely Milky Way foreground dwarf stars, significantly decreasing the observed metallicity spread. From a reanalysis with Keck/DEIMOS spectroscopy and a careful characterization of foreground contamination, \cite{willman2011} identified 45 member stars, 40 of which were classified as high confidence. This included an additional RGB member and two horizontal branch members whose metallicity spread was once again indicative of a dwarf galaxy. These spectroscopic results are confirmed by the photometric {\it HST}-based metallicity distribution function measured by \cite{fu2023}, who determined a significant metallicity spread of $\sigma_{\rm [Fe/H]} = 0.65^{+0.10}_{-0.09}$ dex.
+
+Assuming equilibrium, \cite{willman2011} estimated {\color{red} the dynamical mass of W1 to be} $\sim3.9 \times 10^5 M_{\odot}$ based on a velocity dispersion of $4.8 \pm 0.8$\,\kms, implying a mass-to-light (M/L) ratio of $\sim$770. Due to this apparent high dark matter content and relatively close proximity at a distance of $\sim$38 kpc, W1 {\color{red} remains one of the most promising targets} in the search for dark matter annihilation signals in gamma rays \citep[e.g.,][]{Aliu2009,Bringmann2009,Li2021,McDaniel2023} and X-rays \citep[e.g.,][]{Nieto2010,Loewenstein2010,Loewenstein2012,saeedi2020}.
+
+Yet, previous studies of W1 found evidence for {\color{red} dynamical disequilibrium, including} stellar multi-directional tails and a tentative excess of stars at large half-light radii \citep{willman2006,willman2011}. Specifically, \cite{willman2011} reported an irregular kinematic distribution where stars within the effective half-light radius have a systematically higher velocity than those beyond; this disturbed morphology might point to tidal interactions. If W1 is not in dynamical equilibrium and indeed is {\color{red} undergoing tidal disruption}, then the dynamical mass inferred from its internal velocity dispersion may be misleading.
+
+The main difficulty in accurately classifying W1 and determining its properties lies in the kinematic and spectroscopic similarities between the foreground stars in the Milky Way and the members of W1 \citep{Siegel2008,willman2011,saeedi2020}. With an estimated systemic radial velocity of $-12.8 \pm 1.0$ \kms, the velocities of W1 stars {\color{red} substantially} overlap with the velocities of Milky Way stars \citep{willman2011}. If W1 is {\color{red} dynamically disturbed}, spatial and kinematic cuts, which are often implemented to supplement photometric color-magnitude diagram (CMD) cuts, might instead obscure the odd structural and kinematic features of W1. On the other hand, due to the already small sample size of stars, just a few Milky Way contaminants in the member sample could artificially {\color{red} alter} the velocity dispersion, and thus the inferred dynamical mass of W1, as well as the metallicity spread that is used to characterize it as a dwarf galaxy in the first place. 
+
+To address these uncertainties, this paper revisits W1 and presents a comprehensive study of its structural, kinematic, chemical, and orbital properties. First, we {\color{red} describe our} uniform analysis of both new and archival Keck/DEIMOS spectroscopy for W1 and {\color{red} our incorporation of} \emph{Gaia} astrometry (\S\ref{sec_data}). We {\color{red} then} discuss the probabilistic membership selection performed to reduce the presence of Milky Way foreground contamination (\S\ref{sec_mem}). From this member sample, we measure the properties of W1 including its velocity dispersion, inferred dynamical mass, and metallicity distribution (\S\ref{sec:results}). With {\it HST/ACS} imaging of W1, we summarize previous results for W1's star formation history and look for evidence {\color{red} of} mass segregation (\S\ref{sec:mass_segregation}). We next model the {\color{red} orbital history of W1 and simulate} mock tidal streams (\S\ref{kinematics}). We conclude with a discussion of W1's classification as either a dwarf galaxy or star cluster and its tidal disruption status (\S\ref{dis}).
+
+\section{Observations and Data Reduction}\label{sec_data}
+
+Our kinematic {\color{red} and metallicity} analysis is based on a homogeneous reduction of archival Keck/DEIMOS spectroscopic data (\S\ref{ssec:deimos_redux}, \S\ref{ssec:deimos_redux_feh}), half of which {\color{red} are} published here for the first time.  We supplement this with ground-based photometry and {\it Gaia} astrometry (\S\ref{ssec:ground_gaia}).
+
+\subsection{Keck/DEIMOS Spectroscopy:  Kinematics}\label{ssec:deimos_redux}
+
+We present homogeneously reduced archival data of W1 from the DEIMOS spectrograph \citep{faber03a} on the Keck II 10-m telescope.   Twelve multislit masks were taken of W1 between 2006--2023 (see Table~\ref{tab:masks}). {\color{red} One of these masks was first presented in \citet[PI: Chapman][]{Martin2007} and four masks were published in \citet[PI: Brodie][]{willman2011}.} The remaining seven masks are presented here for the first time {\color{red} [PIs: Geha, Rich]}.    All data were taken with the 1200G grating, providing a spectral resolving power of $R \sim 6000$ at 8500\,\AA. The spectral dispersion of this setup is roughly 0.33\,\AA\ per pixel with a resulting spectral resolution of 1.37\,\AA\ (FWHM).   A summary of observations is presented in Table~\ref{tab:masks}.
+
+A detailed discussion of the data reduction is presented in \citet{geha_paper1} and briefly discussed here. Raw science frames and associated calibrations were obtain through the Keck Observatory Archive\footnote{https://koa.ipac.caltech.edu}.   Data were reduced to one dimensional wavelength-calibrated spectra using the open-source python-based data reduction code {\tt PypeIt} \citep{pypeit2020}.  {\tt PypeIt} reduces the eight individual DEIMOS detectors as four mosaic images, where each red/blue pair of detectors is reduced together.  
+
+Stellar radial velocities were measured using the {\tt dmost} package \citep{geha_paper1}\footnote{https://github.com/marlageha/dmost}.  {\tt dmost} first pre-processes spectra to identify and remove extragalactic objects using a modified version of the automated redshift software {\tt Marz} \citep{marz}.  For the remaining spectra, {\tt dmost} forward models the 1D spectrum for each source from a given exposure with both a stellar template from the PHOENIX library \citep{Husser2013} and a synthetic telluric absorption spectrum from TelFit \citep{telfit2014}. The velocity is determined for each science exposure through an MCMC procedure constraining both the radial velocity of the target star as well as a wavelength shift of the telluric spectrum needed to correct for slit miscentering \citep[see, e.g.,][]{sohn2007}.   We reject velocities where the posterior shape is far from Gaussian, largely spectra with S/N $<3$.  The final radial velocity for each star is derived through an inverse-variance weighted average of the velocity measurements from each individual exposure.    In cases where less than half of individual science exposures for a given star produce a reliable velocity measurement,  we attempt to measure a velocity based on the 1D coadded spectrum following the same method above.    In both cases, a velocity error scaling and velocity floor is applied to the random errors, based on an assessment from thousands of repeat DEIMOS measurements as discussed in \citet{geha_paper1}.   The velocity error floor is 1.1\kms\ for a velocity measured on a single mask.
+
+There are {\color{red} 474} unique targets with extracted DEIMOS spectra, plus {\color{red} 28} sources extracted serendipitously in addition to the target source.   We have photometry and were able to measure radial velocities for {\color{red} 340} of these sources.   125 of these sources are extragalactic, including {\color{red} 14} broad-line quasar spectra.   The remaining {\color{red} 215} sources have velocities and spectra consistent with stars, although we expect only a fraction of these to be W1 members (see \S\ref{ssec:membership}). 12 of these sources have velocity uncertainties greater than 15\kms, above the threshold considered as a secure velocity measurement by \citet{geha_paper1}, and are thus not considered for membership.  We therefore consider {\color{red} 203} stars with measured radial velocities for membership. The radial velocities for the {\color{red} 203} stars and redshifts for the 125 extragalactic sources are available in {\color{red} Table A3 and A4} of \citet{geha_paper1}, respectively.
+
+\subsubsection{Flagging Velocity Variables}\label{ssec:deimos_binaries}
+
+{\color{red} The orbital motions of unresolved binary stars systems when measured at a single epoch can inflate a system's inferred velocity dispersion. To identify such velocity variable stars,} we evaluate whether velocities measured at different times are consistent with random fluctuations from a constant value.  For each star, we first calculate the weighted mean velocity, the equivalent of assuming a constant velocity model. We then calculate the $\chi^2$ value for this model, including random and systematic error components. Following \citet{maxted2001}, we then calculate the probability, $p$,  of obtaining the observed value of $\chi^2$ or higher from random fluctuations around a constant value.  $p$ is evaluated for the appropriate number of degrees of freedom (the number of observations minus one).  We define a star as a velocity variable if log$_{10}p < -1$.  63 out of {\color{red} 340} stars have velocities measured on multiple DEIMOS mask pointings, all of which have measurements separated by more than one year. We find 16 of these stars to be velocity variables, 6 of which are members. Their positions on the CMD are shown in Figure \ref{fig:membership}a.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{deluxetable*}{r C C C C C C C C}
+\tablewidth{\columnwidth}
+\tabletypesize{\footnotesize}
+\tablecaption{Summary of Willman 1 Keck/DEIMOS Observations.\label{tab:masks}}
+\tablehead{\colhead{Mask} & \colhead{Date} & \colhead{N$_{\rm exp}$} & \colhead{$\Sigma t_{\rm exp}$} &
+    \colhead{PIs} & \colhead{Slit width} & \colhead{$N_{\rm slits}$} & \colhead{$N_{\rm good}/N_{\rm slits}$} & \colhead{Reference} \\
+       \colhead{} & \colhead{} & \colhead{} & \colhead{(sec)} & \colhead{} & \colhead{(arcsec)}&
+       \colhead{} & \colhead{} & \colhead{}}
+\startdata
+\hline
+ 203WiSB &   20060527 &            3 &        3600 & Chapman &       0.7 &  63 &     0.62 & \text{\cite{Martin2007}} \\
+ W1\_1    &   20061120 &            5 &        9000 & Brodie  &       1.0   & 113 &     0.48 & \text{\cite{willman2011}} \\
+ W1\_2    &   20061121 &            5 &        9000 & Brodie  &       1.0   & 101 &     0.38 & \text{\cite{willman2011}}\\
+ W1\_3    &   20061122 &            3 &        5400 & Brodie  &       1.0   &  92 &     0.41 & \text{\cite{willman2011}}\\
+ W1\_4    &   20070320 &            3 &        5400 & Brodie  &       0.7 & 123 &     0.07 & \text{\cite{willman2011}}\\
+ W1\_5    &   20170425 &            7 &       12000 & Geha    &       0.7 &  71 &     0.28 & {\rm New~Data; ~this~work}\\
+ W1\_6    &   20170426 &            5 &        9000 & Geha    &       0.7 &  66 &     0.42 & {\rm New~Data; ~this~work}\\
+ W1\_9    &   20210408 &            5 &        9000 & Geha    &       0.7 &  70 &     0.4 & {\rm New~Data; ~this~work}\\ 
+Wil1\_1B  &   20230124 &            6 &        7200 & Rich    &       0.8 &  39 &    0.38     & {\rm New~Data; ~this~work}\\
+wil1\_5   &   20230124 &            6 &        7200 & Rich    &       0.8 &  33 &      0.45    & {\rm New~Data; ~this~work}\\
+Wil1\_2B  &   20230125 &            6 &        7200 & Rich    &       0.8 &  31 &    0.42    & {\rm New~Data; ~this~work}\\
+wil1\_6   &   20230125 &            6 &        7200 & Rich    &       0.8 &  29 &      0.34  & {\rm New~Data; ~this~work}
+\enddata
+\tablecomments{List of DEIMOS masks present in this work.   (1) DEIMOS mask name, (2) date observed, (3) number of exposures reduced in this work, (4) total integrated exposure time, (5) Principal Investigator (PI) name, (6) slit width, (7) number of slits in a mask, (8) fraction of targeted objects in a mask with a measured velocity, (9)  Published reference.}
+\end{deluxetable*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Keck/DEIMOS Spectroscopy:  Metallicities}\label{ssec:deimos_redux_feh}
+
+We use {\tt dmost} to measure the equivalent width of several stellar absorption lines.   We first determine equivalent widths for NaI:\,$\lambda$8183, 8185\,\AA{} and MgI:\,$\lambda$8807\,\AA{}.  The strengths of the NaI and MgI lines are used as proxies for surface gravity to evaluate membership in W1.   We model these lines as a double or single Gaussian, respectively, and integrate the resulting fitted parameters to determine equivalent widths.  These quantities are used at the end of \S\ref{ssec:membership} to validate membership selection.
+
+We measure the equivalent width of the Ca II triplet (CaT) lines ($\lambda$8498, 8542, 8662\,\AA{}) as described in \citet{geha_paper1}.   We simultaneously model the {\color{red} CaT lines} with a Gaussian-plus-Lorentzian profile (for stars at S/N > 15 per spectral pixel) or a Gaussian profile (for stars at S/N < 15 per spectral pixel).  We integrate the resulting fits to determine total equivalent width, which we refer to as CaT.    From these CaT EW measurements, we derived [Fe/H] measurements for all candidate RGB stars ($M_V < 3$) assuming the empirical luminosity-dependent EW–[Fe/H] calibration from {{\color{red} \citet{Navabi2025} which is an update to the \citet{Carrera2013} calibration using the same functional form.}  We {\color{red} adopt} the form of the calibration based on the absolute $V$-band magnitude of each star, which we {\color{red} estimate} by transforming our MegaCam $g-$ and $r-$band photometry (see \S\ref{ssec:ground_gaia}).   As detailed in \citet{geha_paper1}, an error floor of 0.05\,\AA{} is added to the CaT measurements based on repeat measurements, while a 0.1\,dex error floor is included in the [Fe/H] values to account for inherent scatter in the {\color{red} Navabi et al.~calibration} itself, noting this term dominates at S/N $>25$.  
+
+\subsection{Ground-based Imaging and Matching to {\it Gaia}}\label{ssec:ground_gaia}
+
+We require photometry for all kinematic measurements to assess membership in W1 (see Figure \ref{fig:sample}, top panel).   We use the Canada-France-Hawaii Telescopes (CFHT) MegaCam photometric catalog from \citet{munoz2018a} and adopt the fitted density profile and structural parameters from this analysis (see Table~\ref{table_properties}). These data are a full magnitude deeper than that available from the DESI Legacy Imaging Surveys DR9 \citep[][]{Dey2019}. The \citet{munoz2018a} $g-$ and $r-$band magnitudes are corrected for foreground Galactic extinction using \citet{Schlegel1998}. {\color{red} Given the small magnitude uncertainties reported by \citet{munoz2018a} ($< 0.01$ mag), we add a systematic photometric uncertainty of 0.02 mag in quadrature.}
+
+A important improvement to previous studies of W1 is the available \emph{Gaia} DR3 catalogue \citep{GaiaDR3}. While \emph{Gaia} will only cover W1 stars above the subgiant branch ($r \lesssim 20$), it significantly reduces contamination in this region due to the addition of proper motion and parallax measurements.    We match our DEIMOS catalog to \emph{Gaia} DR3 with a {\color{red} $1.5''$} matching radius, resulting in {\color{red} 65} matches that are considered for membership.
+
+\section{Membership Sample}\label{sec_mem}
+
+Assessing whether a given star belongs to W1 or is part of the foreground Milky Way is particularly challenging because of the kinematic overlap between these two populations.  We begin by describing our membership assessment method (\S\ref{ssec:membership}).  We then present our final member sample and compare to previous member samples in the literature (\S\ref{ssec:final_members}).
+
+
+\subsection{Membership Determination}\label{ssec:membership}
+
+To evaluate the likelihood that a given star is a member of W1, we assess five criteria for membership: (1) the star's position on the CMD, $P_{\rm CMD}$; (2) the star's heliocentric radial velocity, $P_{\rm vel}$; (3) the star's proper motion, $P_{\rm pm}$; (4) the star's parallax, $P_{\rm parallax}$; and (5) the star's [Fe/H] iron abundance, $P_{\rm [Fe/H]}$. Criteria (3) and (4) are only considered for stars with parallax and proper motion measurements available from \emph{Gaia} DR3 \citep[][see \S\ref{ssec:ground_gaia}]{GaiaDR3}.  
+
+Due to tentative evidence for multi-directional tails and tidal stripping \citep[][]{Martin2007,willman2011}, no spatial cuts were performed on the data as to not introduce assumptions about W1's spatial spread of stars, although we limit our sample to $3 \rell$ to determine physical properties (see \S\ref{sec:results}).  We additionally consider two surface gravity indicators (NaI and MgI), but find these do not improve membership discrimination for the case of W1 and discuss this below. The membership probability, $P_{\rm mem}$, of a star is defined as the product of all five criteria (Figure \ref{fig:membership}):
+
+\begin{eqnarray}
+    P_{\rm mem} \propto P_{\rm CMD} \times P_{\rm vel} \times P_{\rm pm} \times P_{\rm parallax}  \times P_{\rm [Fe/H]}
+\end{eqnarray}
+
+\noindent
+We next describe in more detail each of {\color{red} these terms.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Figure: Membership selection
+\begin{figure*}[t!]
+%\hskip 0.3 cm
+\includegraphics[width = \textwidth, trim=1cm 0cm 0cm 0cm]{1_membership.pdf}
+%\vskip -0.5 cm
+\caption{From our five criteria for membership (panels \textit{a, b, c, d}), the membership probability of each star was determined (panels \textit{e, f, g, h}). In each plot (\textit{left to right:} CMD, velocity, proper motion, and metallicity profile), all stars with photometric and radial velocity measurements are color-coded according to the membership probability of the criterion in question, with clear non-members ($P_{\rm criterion} < 0.1$) colored gray. Stars with variable velocities are circled in black. The priors for each marker are delineated in the top panels \citep{willman2011,Pace2022}, and the properties derived from our member sample are shown in the bottom panels (see \S\ref{sec:results}, Table \ref{table_properties}).}
+\label{fig:membership}
+\end{figure*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$P_{CMD}$ is determined by comparing each star's position on the CMD to an old, metal-poor isochrone from the \texttt{PARSEC} stellar evolutionary track models \citep[$\tau = 12$ Gyr, Fe/H = $-2.1$,][]{bressan2012}. We use the updated distance value of $38.55 \pm 0.45$ based on {\it HST} imaging from \citet[][uncertainty via private communication]{Durbin2025}. This value is consistent with that measured in \citet[][$38 \pm 7$ kpc]{willman2011}. We use this to calculate the minimum distance between the isochrone and the star's location on the CMD. This distance ($d_{\rm min}$) and the overall magnitude uncertainty of the star ($\delta_{\rm mag}$, the quadrature sum of the $r$-band and $g$-band magnitude uncertainty), are then used to evaluate the star's CMD membership probability, $P_{\rm CMD}$ (see Figure \ref{fig:membership}a):
+
+\begin{eqnarray}
+    P_{\rm CMD} = \exp{ \Biggl( - \frac{d_{\rm min}^2}{2 \bigl[ \sigma_{\rm CMD}^2 + \delta_{\rm mag}^2 \bigr]} \Biggr) },
+\end{eqnarray}
+
+\noindent
+where $\sigma_{\rm CMD}$ is set to 0.15 mag. This CMD spread was roughly estimated from the span of other possible isochrones with varying ages and metallicites ($\tau = 8$ to $13$ Gyr, [Fe/H] $= -1.9$ to $-2.3$) to account for the uncertainty in both parameters.
+
+$P_{\rm vel}$ is based on each star's heliocentric, line-of-sight velocity and, for consistency's sake, is calculated using a similar probability distribution as $P_{\rm CMD}$. For a star with velocity $v \pm \delta_v$, its membership probability based on velocity, $P_{\rm vel}$, is calculated as (see Figure \ref{fig:membership}b):
+\begin{eqnarray}
+    P_{\rm vel} = \exp \Biggl( -\frac{(v - v_{\rm  W1})^2}{2 \bigl[ (3\sigma_v)^2 + \delta_v^2 \bigr]} \Biggr),
+\end{eqnarray}
+
+\noindent
+where $v_{W1} = -12.8$ \kms, the systemic velocity of W1, and $\sigma_v = 4.8$ \kms, the velocity dispersion of W1, as determined by \cite{willman2011}. We multiply the velocity dispersion by three to loosen the distribution and avoid artificially biasing the sample towards the priors.
+
+For stars with measured {\it Gaia} proper motions and parallaxes, the corresponding membership probabilities for each of these quantities, $P_{\rm pm}$ and $P_{\rm parallax}$, were determined. \cite{Pace2022} report proper motion values of $(\mu_{\alpha, \rm W1}^*, \mu_{\delta, \rm W1}) = (0.255 \pm 0.085, -1.110 \pm 0.096)$ mas yr$^{-1}$ for W1 based on \emph{Gaia} EDR3 astrometry. For a star with proper motion ($\mu_\alpha^*, \mu_\delta$) and overall proper motion uncertainty $\delta_{\rm pm}$ (calculated by summing the two dimensions in quadrature), the membership probability based on proper motion, $P_{\rm pm}$, is defined as (see Figure \ref{fig:membership}c):
+
+\begin{eqnarray}
+    P_{\rm pm} = \exp \Biggl( -\frac{(\mu_\alpha^* - \mu_{\alpha, \rm W1}^*)^2 + (\mu_\delta - \mu_\delta {}_{, \rm  W1})^2}{2 \bigl[ (2\sigma_{\rm pm})^2 + \delta_{\rm pm}^2 \bigr]} \Biggr),
+\end{eqnarray}
+
+\noindent
+where $\sigma_{\rm pm}$ is the reported \cite{Pace2022} proper motion uncertainties added in quadrature. Stars with a proper motion uncertainty more than twice its signal value are treated as non-measurements.
+
+Situated at a distance of $\sim 39$ kpc, the parallax of W1 is immeasurable by {\it Gaia}. As we find that the proper motion membership criteria cleans the sample for the brightest stars, we opt for a simple binary parallax marker: The parallax membership probability is defined as $P_{\rm parallax} = 1$ for stars with parallax-over-error is less than 3 and $P_{\rm parallax} = 0$ for stars with parallax-over-error is greater than 3.
+
+Finally, $P_{\rm [Fe/H]}$ is determined from the CaT-based metallicity, [Fe/H], for each star. Similar to the other markers, we determine the metallicity membership probability for a star with iron abundance ${\rm [Fe/H]} \pm \delta_{\rm [Fe/H]}$ as (see Figure \ref{fig:membership}d):
+\begin{eqnarray}
+    P_{\rm [Fe/H]} = \exp \Biggl( -\frac{({\rm[Fe/H]} - {\rm [Fe/H]}_{\rm W1})^2}{2 \bigl[ (2\sigma_{\rm [Fe/H]})^2 + \delta_{\rm [Fe/H]}^2 \bigr]} \Biggr),
+\end{eqnarray}
+
+\noindent
+where [Fe/H]${}_{\rm W1} = -2.1$, the mean spectroscopic metallicity of W1, and $\sigma_{\rm [Fe/H]} = 0.45$ dex, half the distance between the most metal-poor and metal-rich star in the three star spectroscopic sample of \cite{willman2011}. This measurement was chosen as our prior as it is the largest member sample available with spectroscopic metallicity measurements.
+
+Beyond these five parameters, there are a few spectral lines covered by DEIMOS that can be incorporated into membership selection to further differentiate between member stars and Milky Way dwarf star contaminants. The NaI absorption line at $8234~\AA$ correlates with surface gravity and can be used to identify Milky Way dwarf stars which display systematically stronger lines than giants \citep{Schiavon1997}. All stars with $P_{\rm mem} > 0.5$ have small NaI equivalent widths ($<1~\AA$ within 1-$\sigma$). {\color{red} Alternatively,} \cite{Battaglia2012} identified a distinction line between RGB stars and dwarf stars in the equivalent width of the MgI line at $8806.8~\AA$ as a function of the equivalent width of the {\color{red} CaT lines} that can also be used to cut Milky Way dwarf star interlopers. {\color{red} Again, all} stars with $P_{\rm mem} > 0.5$ lie within 1-$\sigma$ of the cut-off line, a result that is consistent with the predictions for a metal-poor system. While the use of these NaI and MgI lines are redundant and do not add more layers to our membership selection, they are a useful tool for validating that our selection criterion are efficiently differentiating between W1 members and Milky Way foreground stars.
+
+
+
+
+
+\subsection{Final Member Sample and Comparison to Literature Samples}\label{ssec:final_members}
+
+The membership probability, $P_{\rm mem}$, of each star is shown in the bottom panels of Figure \ref{fig:membership}. From this, we define stars with $P_{\rm mem} > 0.5$ as members of W1. This results in \ntot members, all but 1 of which lie within $3 \rell$. We recognize the subjectiveness of this probability cut-off and take this into account when calculating the properties of W1 (see \S\ref{ssec:vel_mass}). Multiple velocity epochs exist for {\color{red} 36} of the \ntot stars in our sample, from which we identify 6 velocity variables including 1 blue straggler. We infer the physical parameters of W1 from the \nmem members within $3 \rell$, and these properties are presented in Table \ref{table_properties}.
+
+As shown in Figure \ref{fig:sample}, we report that 28 members are inside the elliptical half-light radius, 19 of which have multiple velocity epochs and non-variable velocities. We highlight that, despite implementing no spatial cuts, the stellar density distribution of our member sample shows no stars in excess of a Plummer profile. The CMD of W1 members is consistent with that of an old, metal-poor system, and we identify {\color{red} eight} RGB stars for which we measure spectroscopic metallicites.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Figure: Member sample (spatial, CMD)
+\begin{figure}[ht!]
+    \includegraphics[width = 0.45\textwidth, trim=0cm 0cm 0cm 0cm]{2_member_sample.pdf}
+    \caption{\emph{Upper:} Spatial distribution of the \ntot W1 member stars, color-coded according to $P_{\rm mem}$. Members with variable velocities are circled in black and non-members are in colored gray. The three concentric dotted ellipses represent the space within 1, 2, and 3 $\rell$. All stars with photometry from \cite{munoz2018a} within $3\rell$, $P_{\rm CMD} > 0.5$, and $r_0 < 23$ are shown in black. The field of view of the \emph{HST/ACS} imaging is denoted red (see \S\ref{ssec:hst_redux}). \emph{Lower:} CMD of W1 member stars overlaid with an old, metal-poor \texttt{PARSEC} isochrone in red. All stars with photometry from \cite{munoz2018a} within $3 \rell$ are shown in black. The liberally defined red giant branch for which we measure spectroscopic metallicities is boxed.}
+    \label{fig:sample}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+All 45 published members in \cite{willman2011} overlap with the Keck/DEIMOS spectroscopy within 1.5$^{\prime \prime}$.  Due to more stringent quality criteria, {\color{red} seven} stars in the 2011 sample have no velocity measurements in this work due to low S/N and poor velocity fits and were thus not considered for membership. A total of {\color{red} 31} stars in the 2011 sample overlap with the \ntot member stars in this work. The {\color{red} seven} remaining stars in the 2011 sample are labeled as non-members: four on the basis of proper motion/parallax estimates from {\it Gaia} {and \color{red} three} due to updated velocities that are inconsistent with the systemic motion of W1. We also find the presence of four stars flagged as velocity variables by this work in the 2011 sample. Of the 52 foreground Milky Way stars reported in \cite{willman2011}, 51 stars have matches with our measured velocities. One of these stars is included in our member sample based on an updated velocity measurement, and {\color{red} we confirm the remaining stars as non-members}.
+
+The completeness of our kinematic sample was evaluated by comparing with the CFHT MegaCam photometric catalog from \cite{munoz2018a}. This photometric catalog was restricted to stars within $3 \rell$ and $P_{\rm CMD} \geq 0.5$, ensuring that we only evaluate the completeness of our sample against likely member stars (see Figure \ref{fig:sample}). All stars with $r_0 \leq 21$ inside 1 half-light radius have spectroscopic measurements and are included in our analysis. For fainter stars ($r_0 \leq 23$), the spectroscopic completeness decreases approximately linearly from 100\% to 70\% from 0 to $3\rell$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{deluxetable}{l c c c}
+\tablewidth{\columnwidth}
+\tabletypesize{\footnotesize}
+\tablecaption{Properties of Willman 1. \label{table_properties}}
+\tablehead{\colhead{Parameter} & \colhead{Value} & \colhead{Units} & \colhead{Reference}}
+\startdata
+$\alpha_{J2000}$   &  162.3436          &  deg    & \cite{munoz2018a} \\
+$\delta_{J2000}$   &  51.0501           &   deg   & \cite{munoz2018a} \\
+$D_{\odot}$        & $38.55 \pm 0.45$  &   kpc   & \cite{Durbin2025}\tablenotemark{a} \\
+$(m-M)_0$          & $17.93 \pm 0.03$     &   mag   & \cite{Durbin2025}\tablenotemark{a} \\
+$r_{\rm half}$     & $2.51 \pm 0.22$    & arcmin  & \cite{munoz2018b} \\
+$r_{\rm half}$     & $26.8 \pm 3.2$     &   pc    & \cite{munoz2018b} \\
+$\epsilon$         & 0.47               &   --    & \cite{munoz2018b} \\
+Position angle     & 73                 &  deg    & \cite{munoz2018b} \\
+$M_V$              & $-2.56 \pm 0.74$   &   mag   & \cite{munoz2018b} \\
+$L_V$              & $888 \pm 605$      & $L_{V, \odot}$  &  \cite{munoz2018b} \\ 
+\hline
+$v_{\rm sys}$      & $\vsys$           & \kms    & \S\ref{ssec:vel_mass} \\
+$\sigma_v$         & $\vdisp$           & \kms    & \S\ref{ssec:vel_mass}\tablenotemark{b} \\
+$M_{1/2}$          & $\mass$            & \Msun   & \S\ref{ssec:vel_mass} \\
+$(M/L)_{V, 1/2}$   & $\ml$              & $M_{\odot} / L_{V, \odot}$ & \S\ref{ssec:vel_mass} \\
+${\rm [Fe/H]}$     & $\met$             &   --    & \S\ref{ssec:met} \\
+$\sigma_{\rm [Fe/H]}$ & $\metdisp$      &   dex   & \S\ref{ssec:met} \\
+\hline
+$\mu_\alpha^*$     & $\pmra$            & mas yr$^{-1}$ & \S\ref{ssec:orbit} \\
+$\mu_\delta$       & $\pmdec$           & mas yr$^{-1}$ & \S\ref{ssec:orbit} \\
+$r_{\rm peri}$     & $\rperi$           & kpc     & \S\ref{ssec:orbit}\tablenotemark{c} \\
+$r_{\rm apo}$      & $\rapo$            & kpc     & \S\ref{ssec:orbit}\tablenotemark{c} \\
+$e$                & $\e$               &    --   & \S\ref{ssec:orbit}\tablenotemark{c} \\
+\enddata
+\tablecomments{List of global structural, kinematic, chemical, and orbital parameters of W1.}
+\tablenotetext{a}{The reported distance/distance modulus uncertainty is likely underestimated as it does not include the systematic contributions from isochrones.}
+\tablenotetext{b}{We opt to cite the velocity dispersion determined from our two-component Gaussian mixture model as it incorporates the uncertainty in membership.}
+\tablenotetext{c}{We report the orbital properties determined from {\texttt MWPotential2014} of \cite{galpy}, with the dark matter halo mass scaled up by 50\% and the addition of the LMC.}
+\end{deluxetable}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Results}\label{sec:results}
+
+With a sample of \nmem W1 members within $3 \rell$ with measured velocities, we next probe the {\color{red} kinematic (\S\ref{ssec:vel_mass}) and chemical (\S\ref{ssec:met}) properties} of this system.
+
+\subsection{Velocity Dispersion and Dynamical Mass} \label{ssec:vel_mass}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Figure: Member sample (velocity dispersion plot)
+\begin{figure}[t!]
+%\hskip 0.3 cm
+\includegraphics[width = 0.5\textwidth, trim=0.75cm 2cm 0.5cm 4.75cm]{3_velocity_dist.pdf}
+%\vskip -0.5 cm
+\caption{Heliocentric radial velocities and uncertainties of the \nmem members as a function of elliptical half-light radius (\emph{upper}) and projected distance with respect to the major axis (\emph{lower}). For both plots, stars to the left and the right of the center axis of W1 are plotted as squares and circles, respectively. All \nmem stars are color-coded purple according to their membership probability and non-members are in gray. In both panels, the dotted black line represents the membership probability weighted 7-star rolling velocity average, and the gray shaded region represents the uncertainty in the rolling average calculated via bootstrapping.}
+\label{fig:sample_vel_disp}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Based on our member sample, we present the velocity profile of W1 in Figure \ref{fig:sample_vel_disp}. \citet[][]{willman2011} reported a peculiar velocity profile where stars within $\sim 0.75 \rell$ are offset from those {\color{red} in the outskirts, which they note as difficult to to explain with an equilibrium model}. This phenomenon is still observed by {\color{red} visual inspection} in our updated member sample (see Figure \ref{fig:sample_vel_disp}, upper panel). Quantitatively, the rolling average decreases by about {\color{red} $8.5 \pm 3.0$\kms~}from the center to the outskirts of W1. We find that this gradient is not obviously explained by ordered rotation (see Figure \ref{fig:sample_vel_disp}, lower panel).
+
+We calculate the systemic velocity and velocity dispersion of W1 using a two-component Gaussian mixture model to simultaneously model the Milky Way and W1. We opt for this approach as it separates the two populations without imposing a strict membership threshold, allowing the inferred velocity dispersion to marginalize over contamination from Milky Way foreground stars \citep[e.g.,][]{Martinez2011}.
+
+We begin by eliminating obvious non-members from our full dataset using the membership probabilities determined in \S\ref{ssec:membership}. We define obvious non-members as stars whose membership probability without velocity ($P_{\rm mem, no v} \propto P_{\rm CMD} \times P_{\rm pm} \times P_{\rm parallax} \times P_{\rm [Fe/H]}$) is less than 0.1 or stars with large radial velocities ($|v| > 150$ \kms). This results in \nmix stars within $3 \rell$. Our results are not sensitive to our membership or velocity cut-off choices {\color{red} within the reported uncertainties}. We then apply a two-component Gaussian maximum likelihood function, whose total log likelihood takes the form \citep{Walker2006}:
+
+\begin{equation*}
+\begin{split}
+    \ln \mathcal{L} = \sum_i \ln \Bigl[f \cdot \mathcal{N}(v_i \, | \, v_{\rm W1}, \sigma_{\rm W1}^2 + \delta v_i^2) + \\ (1-f) \cdot \mathcal{N}(v_i \, | \, v_{\rm MW}, \sigma_{\rm MW}^2 + \delta v_i^2) \Bigr],
+\end{split}
+\end{equation*}
+
+\noindent
+where $f$ is the fraction of W1 members in our dataset, $v_{\rm W1}$ is the systemic velocity of W1, $\sigma_{\rm W1}$ is the velocity dispersion of W1, $v_{\rm MW}$ is the systemic velocity of the Milky Way, and $\sigma_{MW}$ is the velocity dispersion of the Milky Way. We account for the velocity measurement uncertainty of each star, $\delta v_i$, by adding it in quadrature to the intrinsic dispersion of each Gaussian. 
+
+To sample this model, the MCMC sampler \texttt{emcee} \citep{emcee} was run using 20 walkers. We initialize our walkers with the values from \cite{willman2011} for W1 ($v_{\rm W1} = -12.8$ \kms, $\sigma_{\rm W1} = 4.8$ \kms), reasonable values for the Milky Way ($v_{\rm MW} = 0$ \kms, $\sigma_{\rm W1} = 50$ \kms), and a member fraction equivalent to the fraction of our determined member sample ({\color{red} $f = 0.75$}), but our results are not dependent on these choices. We adopt the following uniform priors for our five parameters: $-100 < v_{\rm MW} < 100$ \kms, $0 < \sigma_{\rm MW} < 200$ \kms, $-30 < v_{\rm W1} < 10$ \kms, $0 < \sigma_{\rm W1} < 10$ \kms, $0 < f < 1$. The distribution of posterior samples is shown in the upper panel of Figure \ref{fig:mcmc_vel}. We measure the systemic velocity as the sample median and the associated uncertainties from 16th and 84th percentiles.
+
+The systemic velocity of W1 is estimated to be $v_{\rm sys} = \vsys$ \kms\ with a velocity dispersion of $\sigma_v = \vdisp$ \kms, which is consistent with measurements by \citet{willman2011} and \citet{geha_paper2}. We highlight that the velocity dispersion is degenerate with the member fraction, implying that the large uncertainty in W1's velocity dispersion is driven by the uncertainty in identifying a pure member sample. This result is unchanged within the reported uncertainty when restricting the sample to anywhere within 2 to 4 $\rell$, or when restricting the sample to only stars with multiple velocity epochs. When cutting the sample to $1 \rell$, the uncertainty on the velocity dispersion grows such that the system is not conclusively resolved due to the small sample size of stars. Notably, the kinematic distribution of W1 is asymmetric and non-Gaussian, suggesting that a single global velocity dispersion value is insufficient to fully characterize the complex kinematic profile of W1 (see Figure \ref{fig:mcmc_vel}, bottom panel). % {\color{red} To probe this, we try fitting a three-component Gaussian mixture model, but find that two components consistently converge to two Gaussians centered on the same value (the systemic velocity of W1).}
+
+Assuming dynamical equilibrium, the dynamical mass of W1 within its half-light radius can be inferred from this radial velocity dispersion. Following the methods of \cite{wolf2010}, the mass of W1 within the half-light radius is estimated to be $\mass\Msun$, corresponding to a central mass-to-light ratio of $(M/L)_V = \ml$. This is consistent with the dynamical mass and mass-to-light ratio previously determined by \cite{willman2011} ($\sim3.9^{+2.5}_{-1.6} \times 10^5$\Msun; $(M/L)_V = 770^{+930}_{-440}$; note that we use an updated $M_V$ value causing the mass-to-light ratio in this work to be smaller despite a larger mass).
+
+The member fraction estimated from our mixture model is {\color{red} $f = 0.74^{+0.07}_{-0.08}$}, which is consistent with the number of members determined in \S\ref{sec_mem}. We find {\color{red} similar} results when employing a single Gaussian maximum likelihood model on our member sample of \nmem stars within $3 \rell$. From this method, the systemic velocity of W1 is measured to be {\color{red} $v_{\rm sys} = -12.8^{+1.0}_{-1.0}$ \kms} with a velocity dispersion of {\color{red} $\sigma_v = 4.8^{+0.9}_{-0.8}$ \kms}. Requiring multiple velocity epochs or reducing the half-light radius cut-off down to $2 \rell$ does not alter the systemic velocity or velocity dispersion beyond the uncertainties determined. These results are consistent with the two-component Gaussian, but with likely underestimated uncertainties. As such, we emphasize our values from the mixture model which incorporate the uncertainty in membership as well. {\color{red} Table \ref{tab:members} presents the measured properties of all 73 stars considered in our analysis, including the \nmix stars used in the mixture model and the \ntot stars in the final member sample.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Figure: Velocity dispersion
+\begin{figure}[t!]
+%\hskip 0.3 cm
+\centering
+\includegraphics[width = 0.45\textwidth, trim=0cm 0cm 0cm 0cm]{4_mcmc.pdf}
+\includegraphics[width = 0.45\textwidth, trim=0cm 0cm 0cm 0cm]{4_mcmc_fit.pdf}
+%\vskip -0.5 cm
+\caption{{\it Upper}: Posterior samples for the two-component Gaussian mixture model to measure the systemic velocity and velocity dispersion of W1 based on a velocity sample of \nmix potential member stars within $3 \rell$. The dashed lines represent the median value and 16th and 84th percentiles. {\it Lower}: Best-fit mixture model of two-component Gaussian representing the Milky Way and W1. The {\color{red} 65} potential members used for our fitting are over-plotted, and the member sample (\S\ref{ssec:final_members}) is outlined in purple. We note the asymmetric velocity distribution and comment on this in \S\ref{ssec:tidal}.}
+\label{fig:mcmc_vel}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Metallicity Distribution}\label{ssec:met}
+
+As detailed in \S\ref{ssec:deimos_redux_feh}, we are able to infer [Fe/H] measurements for the stars in our member sample based on CaT equivalent width measurements. This calibration is only valid for RGB stars ($M_V < 3$), significantly reducing our member sample to {\color{red} eight} stars with measured metallicities, {\color{red} all of which are within $2\rell$} (see Figure \ref{fig:sample}, lower panel; Figure \ref{fig:metallicity}, upper panel). From this sample, we determine the CaT-based mean metallicity and metallicity dispersion using an MCMC sampler with 20 walkers to sample from a Gaussian maximum likelihood function \citep{emcee,Walker2006}. We opt not to use a mixture model as performed in \S\ref{ssec:vel_mass} due to the small sample size (see Figure \ref{fig:membership}h). We initialize our walkers using the values determined by \cite{willman2011} ($[{\rm Fe/H}] = -2.1$, $\sigma_{\rm [Fe/H]} = 0.45$ dex). The median and 16th and 84th percentiles of the resulting posterior distribution function are presented.
+
+The metallicity of W1 is measured to be [Fe/H] $= \met$ with a metallicity dispersion of $\sigma_{\rm [Fe/H]} = \metdisp$ dex (see Figure \ref{fig:metallicity}). The removal of the highest metallicity star slightly lowers the measured average metallicity and substantially reduces the measured metallicity spread ({\color{red}to ${\rm [Fe/H]} = -2.53^{+0.08}_{-0.09}$, $\sigma_{\rm [Fe/H]} = 0.12^{+0.12}_{-0.08}$ dex}). We emphasize that this star has a high membership probability ({\color{red} $P_{\rm mem} \sim 0.9$}) and that the mean metallicity without this star is still within the uncertainties derived with the full sample.
+
+\cite{willman2011} measured a metallicity spread in W1 based on Keck/DEIMOS spectroscopy of three RGB members ([Fe/H] = $-1.73 \pm 0.12$, $-2.65 \pm 0.12$, and $-1.92 \pm 0.21$). These three stars are in our member sample, although we report slightly lower metallicity values for two of these stars ({\color{red} [Fe/H] = $-2.32 \pm 0.13$, $-2.56 \pm 0.13$, and $-2.61 \pm 0.19$, respectively}). In comparison with the photometric metallicity values derived from {\it HST} CaHK imaging from \cite{fu2023} {\color{red} ([Fe/H] = $-2.53^{+0.11}_{-0.11}$, $\sigma_{\rm [Fe/H]} = 0.65^{+0.10}_{-0.09}$ dex})}, we measure W1 to be a slightly more metal-rich system with a substantially smaller metallicity dispersion.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Figure: Member metallicity plot
+\begin{figure}[t!]
+%\hskip 0.3 cm
+\includegraphics[width = 0.45\textwidth, trim = 1cm 2.5cm 2cm 3.5cm]{5_metallicity.pdf}
+%\vskip -0.5 cm
+\caption{CaT equivalent width as a function of V-band magnitude ({\it upper} panel) and the CaT-based spatial metallicity distribution ({\it lower} panel) for the {\color{red} eight} RGB stars in our member sample. The solid line denotes the calibration range of the empirical relationship of \cite{Carrera2013} plotted at the mean metallicity of W1 while the dotted lines represents the metallicity dispersion determined from MCMC sampling.}
+\label{fig:metallicity}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Mass Segregation}\label{sec:mass_segregation}
+
+We now shift our attention to the {\it HST/ACS} data (\S\ref{ssec:hst_redux}), evaluating the presence of stellar mass segregation which can be used to differentiate between a galactic and star cluster origin for W1 (\S\ref{ssec:mass_seg_analysis}).
+
+\subsection{HST/ACS Imaging}\label{ssec:hst_redux}
+
+W1 was observed by the {\it Hubble Space Telescope (HST)} in 2017 as part of the Treasury Program GO-14734 (PI-Kallivayalil).   Deep photometry of W1 was obtained  with the Advanced Camera for Surveys \citep[ACS;][]{Ford1998} using the Wide Field Channel (WFC).   The ACS/WFC field approximately covers the inner half-light radius of W1 (see Figure \ref{fig:sample}, upper panel). Observations were split evenly between the F606W and F814W filters with a combined exposure time of 9254\,seconds.
+
+For the analysis below, we use the same {\it HST} data reduction as described in \citet{Richstein2024}.  Briefly, the individual exposures from each filter were aligned and co-added using DrizzlePac, an {\it HST} software package. The combined output images were then masked with the \texttt{segmentation} routine from the \texttt{photutils} package \citep{photutils}. PSF-fitting photometry was performed on the combined images using DAOPHOT-II and ALLSTAR \citep{Stetson1987, Stetson1992}. The source lists from F606W and F814W were matched using DAOMATCH and DAOMASTER to create a preliminary PSF source catalog. An empirically-derived aperture correction was applied to the magnitudes, which were then converted to the VegaMag system and adjusted for the exposure time. Finally, to address star-galaxy separation, each source was assigned a quality flag from 0 to 1 based on how closely its parameters matched those in artificial star tests across different filters.
+
+We also note that \cite{Durbin2025} used {\it HST} imaging to measure the star formation histories of 36 ultra-faint dwarf galaxies, including W1. Their results indicate that 50\% of W1's stellar mass formed $\tau_{50} = 13.44^{+0.00}_{-0.81}$ Gyr and 90\% of W1's stellar mass formed before $\tau_{90} = 8.37^{+0.08}_{-0.93}$ Gyr, indicating a uniformly ancient stellar population formed from an early burst of star formation. We obtain consistent results when performing {\color{red} a similar} star formation history analysis on this dataset.
+
+\subsection{Mass Segregation Determination}\label{ssec:mass_seg_analysis}
+
+The presence of mass segregation can be used as a diagnostic for determining whether a system is a star cluster or a dwarf galaxy \citep{baumgardt2022}. Due to the equipartition of kinetic energy whereby high-mass stars transfer energy to low-mass stars over time, high-mass stars tend to aggregate near the center of systems while low-mass stars drift towards the outer regions. This process occurs over the course of a few relaxation periods, and is thus a significant feature in old stellar objects with relatively short relaxation periods compared to their age, such as globular clusters \citep[e.g.,][]{Tripathi2023,Kim2015,Weatherford2020}. For systems with substantial amounts of dark matter such as ultra-faint dwarf galaxies, the system's relaxation period is prolonged beyond a Hubble time such that mass segregation is unobservable \citep[][]{Longeard2018}.
+
+\cite{baumgardt2022} first evaluated the presence of mass segregation in W1 using {\color{red} an independent reduction of the same} {\it HST/ACS} imaging. {\color{red} They compared the cumulative radial distribution of stars in the upper and lower regions of the main sequence, constructing} two samples: one of bright, higher-mass stars and the other of faint, lower-mass stars. {\color{red} In highly segregated systems, such as globular clusters,} the ratio of half-light radii for these two samples usually lies around 0.7. {\color{red} For W1,} \cite{baumgardt2022} measured a ratio of $R_{\rm half, bright} / R_{\rm half, faint} = 1.05 \pm 0.08$, indicating a lack of mass segregation and evidence towards a dwarf galaxy classification. 
+
+Loosely following the methods of \cite{baumgardt2022}, we re-analyze the same {\it HST/ACS} data to rigorously evaluate the possibility of mass segregation in W1. {\color{red} We begin by removing} extragalactic sources, defined as those with star quality flags $> 0.7$. To isolate the probable member stars in W1, we compared the CMD of the 1,055 remaining stars to an old, metal-poor isochrone from the \texttt{MIST} stellar evolutionary track models ($\tau = 12$ Gyr, [Fe/H] = $-2$, shifted to a distance modulus of $m-M = 17.93$ which corresponds to a distance of 38.55 kpc), accounting for interstellar reddening \citep{Dotter2016,Choi2016,Sirianni2005,Schlegel1998}.   We define members as stars with the greater of either 0.15 mag or twice their photometric uncertainty from the isochrone. Finally, due to the limited field of view of the ACS/WFC compared to the extended spatial distribution of W1, only stars contained within $1 \rell$ were included to ensure that the mass segregation profile was not controlled by just a few outlying stars. Our final sample consists of 635 stars.
+
+We {\color{red} first} use the MS turnoff and the estimated location of $0.5M_{\odot}$ stars included in the synthetic isochrone as upper and lower photometric bounds. The stars that passed the spatial and CMD cuts within these bounds were divided into two groups of equal size based on stellar brightness to create two separate samples of bright and faint stars (see Figure \ref{fig:mass_seg}, upper left panel). The radial cumulative distribution of stars for each sample was determined using an elliptical aperture with half-light radius, position angle, and ellipticity values from \cite{Martin2008} (see Table \ref{table_properties}). The half-light radius for each sample was defined as the elliptical radius within which half of the stars of each sample are contained.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Figure: Mass segregation CMD plot
+\begin{figure*}[t!]
+%\hskip 0.3 cm
+\centering
+\includegraphics[width = \textwidth,trim=0cm 0cm 0cm 0cm]{6_mass_seg.pdf}
+%\vskip -0.5 cm
+\caption{Mass segregation analysis of W1 from \emph{HST/ACS} observations. \emph{Left:} CMD of W1 \emph{HST} data overlaid with an old, metal-poor \texttt{MIST} isochrone in orange. Blue and purple stars show the stars selected based on different magnitude cuts ({\it upper} = $0.5M_{\odot}$; {\it lower} = 50\% completeness threshold) to calculate the mass segregation profile. \emph{Right:} Corresponding average cumulative elliptical radial distribution of stars. The shaded region corresponds to the 1-$\sigma$ uncertainty calculated by bootstrapping over each sample. No significant signs of mass segregation are detected.}
+\label{fig:mass_seg}
+\end{figure*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\cite{baumgardt2022} estimated that the expected half-light ratio between bright and faint stars for a star cluster the size of W1 is 0.90, a value which would only be more extreme if W1 is tidally disturbed as both mass segregation and tidal stripping would preferentially remove low-mass stars from the central regions \citep{Paust2009}. We obtained a half-light radius ratio of $R_{\rm half, bright} / R_{\rm half, faint} = 1.05 \pm 0.08$, where the uncertainty is calculated by bootstrapping over each sample {\color{red} (see Figure \ref{fig:mass_seg}, upper right panel)}. A standard two-sample KS test shows a <1\% probability of mass segregation, which we highlight as a more comprehensive test statistic that takes into account the full distributions rather than evaluating the discrepancy between distributions at a single location. This process was repeated using varying lower bound cut-offs all the way down to the 50\% photometric completeness limit {\color{red} (see Figure \ref{fig:mass_seg}, bottom panels)}. 
+
+{\color{red} The results of these varied samples are consistent with an unsegregated system, with only a few samples showing inconclusive results (that is, with values compatible with both a segregated and unsegregated system). These results are unchanged by the use of a circular aperture, as originally performed by \cite{baumgardt2022}.} All KS tests performed had probabilities of mass segregation less than 29.7\%, the value determined by \cite{baumgardt2022}.
+
+{\color{red} It should be noted that \cite{willman2006} presented evidence for mass segregation using ground-based photometry to compare the luminosity function (LF) of stars in the central and tail regions.} Observing an excess of low luminosity stars in the tail region, they performed a KS test that showed a 68\% chance that the two stellar LFs were drawn from different populations, which was interpreted as evidence for mass segregation. To revisit this claim using a larger sample size and deeper photometry, the 635 {\it HST} member stars were divided into two samples by implementing similar cuts to \cite[][Fig.~4]{willman2006}: central stars within $0.5 \rell$ and outer stars beyond $0.5 \rell$. As carried out by \cite{willman2006}, the LF for each sample was determined and an offset value was added to the central region sample to correct for a difference in sample size and facilitate direct comparison. No surplus of low luminosity stars are observed in the outer stars and performing a two-sample KS test on the inner and outer sample LFs shows a $< 10\%$ probability that the two LFs were drawn from different populations, which we interpret as additional evidence that W1 is unsegregated. As one final check, this process was repeated for \ntot member stars from our analysis of the DEIMOS data (\S\ref{ssec:final_members}), which also show no excess of low luminosity stars at the outskirts.   {\color{red} Thus, we find no evidence for mass segregation in W1, consistent with the results of \citet{baumgardt2022}. This supports a dwarf galaxy classification for the system.}
+
+\section{Dynamical history}\label{kinematics}
+
+We next investigate the possibility of past tidal interactions between the Milky Way and W1 by examining the orbital history of W1 (\S\ref{ssec:orbit}) and simulating mock stellar streams (\S\ref{ssec:streams}).
+
+\subsection{Orbit}\label{ssec:orbit}
+
+{\color{red} We compute the orbit of W1 using the analytic potential \texttt{MWPotential2014} of the \texttt{galpy} package by \cite{galpy}. This model of the Milky Way's gravitational potential consists of a power-law spherical potential representing the bulge \citep{Binney}, a Miyamoto-Nagai disk potential \citep{Miyamoto}, and a NFW dark matter halo potential \citep{Navarro}. From this, we} integrate the orbit of W1 backwards in time based on its 6D phase-space coordinates (see Table \ref{table_properties} for values). We measure a proper motion of $(\mu_{\alpha}^*, \mu_{\delta}) = (\pmra, \pmdec)$ mas yr$^{-1}$ by using a single Gaussian maximum likelihood model on the seven stars in our member sample with measured {\it Gaia} proper motions (see Figure \ref{fig:membership}g). This is consistent with the results of \cite{Pace2022}, who apply background mixture models to {\it Gaia} EDR3 data, both in measurement value and the number of {\it Gaia} members.
+
+Previous orbital analyses of Milky Way dwarf galaxies have reported moderately small pericenter {\color{red} distance} values for W1 \citep[ranging from 16 kpc to 44 kpc;][]{Pace2022,Simon2018,Armstrong2021}, but are highly dependent on membership selection and the assumed Milky Way potential. {\color{red} To probe the effect of different assumed Milky Way potentials, we also model W1's orbit using two other potentials.} The {\color{red} estimated mass} of the Milky Way's dark matter halo for \texttt{MWPotential2014} is on the lower end with a value of $0.8 \times 10^{12}$\Msun. To account for this uncertainty, {\color{red} the second potential we adopt is the same \texttt{MWPotential2014}} with a 50\% larger dark matter halo mass ($1.2 \times 10^{12}$\Msun). The Large Magellanic Cloud (LMC) has also been known to affect the orbits of objects, even those distant from it, due to the reflex-motion of the Milky Way's orbit \citep[e.g.,][]{Erkal2021,Ji2021,Magnus2022,Patel2024}. This MW+LMC potential is the third and final potential we use to calculate the orbit of W1, where the LMC is modeled by a moving Hernquist potential of mass $1.38 \times 10^{11} \Msun$ and scale radius of 8.7 kpc, taking into account dynamical friction \citep{galpy,Marel2014,Hernquist1990}. We find the dynamical friction of W1 to have a negligible impact on its orbit. Due to uncertainty in orbit integration models beyond one orbital period \citep[especially for satellites with pericenter distances $<30$ kpc,][]{DSouza2022,Machado2025}, we use these potentials to model the 3-dimensional orbit of W1 over only the last 1 Gyr with a time resolution of 1 Myr.
+
+Figure \ref{fig:orbit_comp} compares the modeled orbits of W1 using these three different Milky Way potentials. The orbital period predicted by the original \texttt{MWPotential2014} is larger than the other two potentials by $\sim 0.2$ Gyr. In all cases, W1 is {\color{red} at apocenter,} coming from a position closer to the Galactic center, although the exact pericenter {\color{red} distance} of the orbit depends on the potential used.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Figure: Orbital history comparison with other potentials
+\begin{figure}[t!]
+%\hskip 0.3 cm
+\includegraphics[width = 0.5\textwidth, trim = 0.5cm 1.5cm 0.25cm 2.5cm]{7_orbit.pdf}
+%\vskip -0.5 cm
+\caption{Orbit of W1. \emph{Upper:} Distance of W1 to the galactic center as a function of time using three different Milky Way potentials from \cite{galpy} orbital simulations. \emph{Lower:} Same as above but only showing the orbital simulations using \texttt{MWPotential2014} of \cite{galpy}, with the dark matter halo mass scaled up by 50\% and the addition of the LMC. The blue line represents the 50th percentile orbit from Monte Carlo sampling over the 6D phase space parameter uncertainties; the dark blue shaded region represents the space within the 16th and 84th percentile orbits; and the light blue region represents the space between the 5th and 95th percentile orbits.}
+\label{fig:orbit_comp}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Due to the uncertainties in distance, velocity, and proper motion measurements, the uncertainty in the orbit of W1 was calculated through Monte Carlo sampling. 1,000 six-dimensional phase-space coordinates were created by sampling distance, velocity, and proper motion values from Gaussian distributions based on each parameter's average estimated value and 1-$\sigma$ standard deviation (see Table \ref{table_properties}). The reported distance uncertainty from \cite{Durbin2025} is likely underestimated as it does not include systematic contributions from the isochrones. Our orbital solutions remain conclusively consistent with a system moving away from a position closer in to the Milky Way up to distance uncertainties of $\sim3$ kpc.
+
+This procedure was performed for both the regular \texttt{MWPotential2014} and the potential with the addition of the LMC (see Figure \ref{fig:orbit_comp}). The orbit of W1 under the regular \texttt{MWPotential2014} has a pericenter {\color{red} distance} of {\color{red} $r_{\rm peri} = 24.9^{+3.5}_{-3.1}$ kpc, an apocenter {\color{red} distance} of $r_{\rm apo} = 43.5^{+0.4}_{-0.5}$ kpc, and an eccentricity $e = 0.27^{+0.06}_{-0.06}$. The addition of the LMC modifies} these predictions, simulating a pericenter {\color{red} distance} of {\color{red} $r_{\rm peri} = \rperi$ kpc, an apocenter {\color{red} distance} of $r_{\rm apo} = \rapo$ kpc, and an eccentricity of $e = \e$}. These reported parameters represent the median of our sampling procedure, and the uncertainties represent the {\color{red} 16th} and {\color{red} 84th} percentiles. None of the orbital samples for both potentials have pericenter {\color{red} distances} greater than 40 kpc, indicating that the trajectory of W1 is most likely to be coming out of the Milky Way approaching apocenter.
+
+To quantitatively verify that W1 is at apocenter, we calculate the ratio $f_{\rm peri}$ of \cite{Fritz2018}:
+\begin{eqnarray}
+    f_{\rm peri} = \frac{r_{\rm GC} - r_{\rm peri}}{r_{\rm apo} - r_{\rm peri}},
+\end{eqnarray}
+
+\noindent
+which is a proxy for the orbital phase in the radial direction. $f_{peri} = 0$ and $1$ indicate an object at pericenter and apocenter, respectively. For both the regular \texttt{MWPotential2014} and with the addition of the LMC, the ratio was determined to be $f_{\rm peri} = 0.99 \pm 0.01$, consistent with our conclusion that W1 is being observed at or very near apocenter after spending time closer to the {\color{red} Galactic center}.
+
+From the estimate of the central dynamical mass of W1 ($M_{\rm W1}$), the Jacobi tidal radius of W1 ($R_{J}$) as a function of orbital radius ($R_{\rm W1}$) can be approximated \citep{Innanen1983}:
+\begin{eqnarray}
+    R_{J}(R) &= \Bigl( \frac{M_{\rm W1}}{3 M_{\rm MW}} \Bigr)^{1/3} R_{\rm W1}
+\end{eqnarray}
+
+\noindent
+The mass of the Milky Way enclosed within the orbital radius of the satellite ($M_{\rm MW}$) was determined from \texttt{MWPotential2014} with a dark matter halo mass enlarged by 50\% ($1.2 \times 10^{12}$\Msun). From this, the current Jacobi tidal radius of W1 is estimated to be $R_{J} = 220^{+120}_{-140}$ pc, which corresponds to {\color{red} $7.7^{+1.6}_{-1.8}$ half-light radii}. In comparison, the tidal radius of W1 at pericenter is {\color{red} $R_{J} = 88^{+52}_{-57}$ pc}, which is equivalent to {\color{red} $3.1^{+0.8}_{-0.8}$ half-light radii}. These {\color{red} orbit integrations} suggest that, at pericenter, the Jacobi radius of W1 was within a few half-light radii of its center.
+
+The current dynamical properties of a satellite also correspond to their infall time, as shown by \cite{Rocha2012} using subhalos from the Via Lactea II cosmological simulations. Their work found a tight correlation between orbital energy and infall time where subhalos that were accreted earlier had more time to sink into the gravitational potential of the Milky Way, resulting in energies corresponding to more tightly bound systems \citep[see Fig.~2 of][]{Rocha2012}. Tightly bound objects cluster at small Galactocentric radii and low speeds \citep[see Fig.~3 of][]{Rocha2012}, consistent with the properties of W1 (see Figure \ref{fig:comparison2}, center panel). Indeed, our orbital model for W1 suggests that W1 is one of the most tightly bound dwarf galaxies based on its total energy. From this relation, we estimate W1's infall time to be roughly 9 Gyr ago. Combining this with an orbital period of $\sim 0.6$ Gyr (see Figure \ref{fig:orbit_comp}, bottom panel), we can estimate that W1 has undergone $\sim 15$ orbits since it crossed into the virial radius of the Milky Way.
+
+\subsection{Mock tidal streams}\label{ssec:streams}
+
+To further probe the possibility of tidal interactions between the Milky Way and W1, we use the \texttt{gala} particle stream spray to generate simulated stellar streams {\color{red} for comparison} with the distribution of W1 stars {\color{red} \citep{gala}}. We adopt the same six-dimensional phase-space coordinates and Milky Way gravitational potential as used in the orbit integration {\color{red} \citep[\texttt{MWPotential2014}, 50\% enlarged dark matter halo of][]{galpy}}. The mass of the simulated progenitor was set to $5.9 \times 10^5 \Msun$ (the central dynamical mass of W1 determined in \S\ref{ssec:vel_mass}), and a scale radius of 26.8 pc (the half-light radius of W1) was used to represent W1. The self-gravity of W1 was modeled by a Plummer potential \citep{willman2011,plummer}. The orbit of W1 was integrated backward in time over 1 Gyr in 1 Myr intervals, and then re-integrated forward in time to the present {\color{red} spraying particles} at each of the two Lagrange points at each time step following the Fardal Stream distribution function \citep{Fardal2015}.
+
+{\color{red} Figure \ref{fig:mock_stream} presents the results of these simulations. The mock streams exhibit a large spatial spread, with the highest-density regions approximately along W1's semi-major axis. This orientation is also aligned with W1's orbital trajectory and average solar-reflex-corrected proper motion vector, consistent with expectations for tidal stripping along the orbit.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Figure: Particle stream spray
+\begin{figure}[t!]
+\hskip 0.3 cm
+\includegraphics[width = 0.45\textwidth, trim = 1.25cm 2.25cm 1.75cm 1cm]{8_stream.pdf}
+%\vskip -0.5 cm
+\caption{Spatial distribution of simulated particles from \texttt{gala} mock stream spray model using \texttt{MWPotential2014} of \cite{galpy} with a 50\% enlarged dark matter halo ($1.2 \times 10^{12} \Msun$). The member sample is over-plotted and color-coded according to their membership probability. The systemic proper motion vector corrected for solar reflex motion is denoted by the light purple arrow, and the three concentric dotted ellipses represent 1, 2, and $3 \rell$.}
+\label{fig:mock_stream}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Figure: Luminosity-Metallicity relation
+\begin{figure}[t!]
+%\hskip 0.3 cm
+\includegraphics[width = 0.45\textwidth, trim = 1cm 0cm 1cm 0cm]{9_comparison1.pdf}
+%\vskip -0.5 cm
+\caption{Comparison of W1 (red star) with other Milky Way dwarf galaxies (blue circles), globular clusters (orange circles), and ambiguous objects (green circles) taken from \citep{Pace2025}. \emph{Upper:} [Fe/H] iron abundance spectroscopic metallicity as a function of absolute V-band magnitude. W1 is significantly fainter compared to other dwarf galaxies in its metallicity range, which could be explained by mass loss due to tidal stripping. \emph{Lower:} Absolute V-band magnitude {\color{red} vs.} half-light radius. W1 is one of the faintest dwarf galaxies and has one of the smallest half-light radii.}
+\label{fig:comparison1}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Figure: Orbital parameters comparison
+\begin{figure*}[t!]
+%\hskip 0.3 cm
+\includegraphics[width = \textwidth]{10_comparison2.pdf}
+%\vskip -0.5 cm
+\caption{Comparison of the orbital properties of W1 with other Milky Way dwarf galaxies and globular clusters. W1 is denoted by a red star (see Table \ref{table_properties}), Milky Way dwarf galaxies as blue circles, and globular clusters as orange circles \citep{Pace2025}. {\it Left:} Apocenter {\color{red} distance} as a function of pericenter {\color{red} distance}. The locations of different orbital eccentricities are labeled as dotted lines. W1 has small pericenter and apocenter {\color{red} distances} relative to other Milky Way dwarf galaxies. {\it Center:} Radial velocity as a function of Galactocentric radius, which corresponds to its binding energy and infall time \citep{Rocha2012}. The black lines represent the {\color{red} escape velocity curves computed} using \texttt{MWPotential2014} of \cite{galpy} with a 50\% enlarged dark matter halo {\color{red} mass}. W1 has one of the smallest radial speeds and Galactocentric radii, corresponding to a high binding energy and early infall time (see \S\ref{ssec:orbit}). {\it Right:} Average density within one half-light radius as a function of orbital pericenter {\color{red} distance}. The black line shows twice the enclosed Milky Way density as a function of radius. According to \cite{Pace2022}, if the satellite sits below this line, its Jacobi radius will be larger than the half-light radius and it will likely be tidal disrupting.}
+\label{fig:comparison2}
+\end{figure*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Discussion}\label{dis}
+
+\subsection{Is W1 a dwarf galaxy?}\label{ssec:dwarf}
+
+We now turn to the question of the nature of W1: is this object a dwarf galaxy or a star cluster? {\color{red} Due to its large mass-to-light ratio, observed metallicity spread, lack of mass segregation, and position on the size-luminosity plane, we  conclude that W1 is a dwarf galaxy.}
+
+From our kinematic analysis (\S\ref{ssec:vel_mass}), we measure a mass-to-light ratio of $\ml$ from the \nmem non-variable member stars within $3 \rell$. This large mass-to-light ratio, far from unity, indicates a dark matter-dominated object \citep[e.g.,][]{Martin2007,simon07a}. We emphasize that cutting to within different half-light radii down to $2 \rell$ does not change our results. {\color{red} For W1's stellar mass, its mass-to-light ratio is consistent with the larger Milky Way satellite galaxy population \citep[][, Fig.~2]{geha_paper2}.} From our metallicity analysis (\S\ref{ssec:met}), we find evidence for a metallicity spread ($\sigma_{\rm [Fe/H]} = \metdisp$ dex) based on {\color{red} eight RGB} stars with measured spectroscopic metallicities. This metallicity spread suggests that W1 has self-enriched, a property of satellites with dark matter halos that allow them to retain their gas more efficiently and go through successive epochs of star formation \citep[e.g.,][]{willman2012,Kirby2013}.
+
+We conduct a comprehensive search for the presence of mass segregation in W1 based on {\it HST/ACS} imaging (\S\ref{sec:mass_segregation}). We find a lack of mass segregation, implying a dwarf galaxy classification and consistent with previous work of \cite{baumgardt2022}. {\color{red} Recent} simulations by \cite{Errani2025} suggest that mass segregation can occur in very low stellar mass objects, even if they host a dark matter halo. However, {\color{red} W1's relatively large size and luminosity compared to the objects studied prolong its relaxation time beyond a Hubble time, making this effect negligible.}
+
+Finally, we compare the structural properties of W1 to other Milky Way satellites. We rely on the Local Volume Database of \cite{Pace2025} for a comprehensive repository of the latest literature values of the observed properties of Milky Way dwarf galaxies, globular clusters, and ambiguous objects. The position of W1 on the size-luminosity plane of confirmed Milky Way satellites {\color{red} is more consistent with the the dwarf galaxy population}; W1 is significantly less compact than globular clusters with similar luminosities (see Figure \ref{fig:comparison1}; {\color{red} lower} panel).
+
+\subsection{Is W1 tidally disrupted?}\label{ssec:tidal}
+
+The total mass of satellite systems are estimated under the assumption of dynamical equilibrium \citep{wolf2010}. It is thus crucial to understand the dynamical state of W1 in order to determine whether its measured internal velocity dispersion is a true reflection of its dynamical mass. We will now weigh the evidence for and against tidal disruption.
+
+The evidence for tidal disruption is the following. First, the spatial distribution of W1 is elongated, with an ellipticity of $\epsilon = 0.47$ \citep{munoz2018b}. Crucially, {\color{red} high-probability member stars extend out to $3\rell$ and are not confined to only the central regions}. Although we do not see the presence of extended spatial features beyond $3 \rell$ as suggested by previous work and we report that the number density of stars is consistent with the expected Plummer distribution, this is not inconsistent with simulations of mildly stripped satellites \citep[e.g.,][]{Penarrubia2009}. 
+
+Second, we continue to observe an irregular velocity profile, as originally noted in \cite{willman2011}, where the velocities of stars within $\sim 0.75 \rell$ are systematically higher (see Figure \ref{fig:sample_vel_disp}, upper panel). This {\color{red} produces} a remarkably asymmetric, non-Gaussian velocity distribution (see Figure \ref{fig:mcmc_vel}, lower panel). Furthermore, we find that the velocity dispersion of the central member stars within $1\rell$ is significantly lower than the velocity dispersion measured out to 2--4$\rell$, even when accounting for Milky Way interlopers via Gaussian mixture modeling. 
+
+The luminosity-metallicity relation has been shown to be tight for dwarf galaxies {\color{red} \citep{Kirby2013,Simon2019,geha_paper2}}. For satellites that initially conform to this relation, tidal stripping decreases their luminosity while the average metallicity is unchanged. {\color{red} The location of satellites to the left of the luminosity-metallicity relation} has been used as a diagnostic for tidal stripping {\color{red} \citep[e.g.,][]{Kirby2013_seg2,Kirby2015_tri,collins2020}; however see \cite{Riley2026} for a more in depth discussion.} We find evidence for this phenomenon in the case of W1 where the luminosity of W1 is much fainter when compared to dwarf galaxies of similar metallicities (see Figure \ref{fig:comparison1}, upper panel).
+
+Our {\color{red} tidal-stream simulations} for a W1-like progenitor show that W1's elongated structure is along the same axis {\color{red} as the high-density regions} of the mock streams. These features are also aligned with the orbital trajectory of W1, {\color{red} consistent with the hypothesis that tidal stripping from the Milky Way's gravitational field could explain W1’s elongated and elliptical spatial distribution.}
+
+{\color{red} Our best-fit orbital solutions conclusively predict W1 to currently be at apocenter, with a pericentric passage $\lesssim 25$ kpc. At this location, the Jacobi radius of W1 would be on the order of a few half-light radii, potentially allowing for the stripping of stars at the outskirts. We also compare the orbital parameters of W1 with those of other Milky Way dwarf galaxies and globular clusters in Figure \ref{fig:comparison2}. These parameters were determined by following the same methods as performed on W1 using the MW+LMC potential (\S\ref{ssec:orbit}). W1 has one of the smallest radial speeds and Galactocentric radii of the Milky Way's dwarf galaxies, consistent with a system with a high binding energy and early infall time (see Figure \ref{fig:comparison2}, center panel). In combination with its small pericenter and apocenter {\color{red} distances} (see Figure \ref{fig:comparison2}, left panel)}, this suggests that slow tidal stripping from W1's sustained passage near the Milky Way over the course of its orbit could explain W1's elongated structural properties and irregular kinematic profile.
+
+The evidence against tidal disruption is W1's large density, which implies that its half-light radius is smaller than its Jacobi radius (see Figure \ref{fig:comparison2}, right panel). However, we note multiple other dwarf galaxies with evidence for tidal disruption also lie above this line \citep[e.g., Bo\"otes I, Hercules,][]{Filion2021,Ou2024}. If W1 is indeed tidally disrupted and exhibits a large density, this could suggest that tidal stripping is more efficient than previously thought.
+
+{\color{red} Overall, we find that the evidence for tidal disruption outweigh the evidence against it. The morphological and kinematic properties of W1 support a scenario in which W1 is experienced sustained tidal stripping due to its proximity to the Milky Way over the course of its orbit. Importantly, the presence of tidal stripping does not invalidate the evidence for W1's classification as a dwarf galaxy. Even if its current velocity dispersion is inflated or not fully representative of its dynamical mass, we emphasize the observed metallicity spread, lack of mass segregation, and position on the size-luminosity plane as continued evidence for W1's dwarf galaxy classification. Therefore, while tidal effects may complicate the interpretation of the measured velocity dispersion, we still conclude that W1 is a dwarf galaxy that is likely tidally evolving with the Milky Way.}
+
+\section{Conclusion}
+
+We have presented a comprehensive study of the structural, kinematic, chemical, and orbital properties of W1. Our main {\color{red} results} are summarized as follows:
+\begin{itemize}
+    \setlength\itemsep{0pt}
+    \setlength\parskip{0pt}
+    \setlength\parsep{0pt}
+    
+    \item {\color{red} We identify a member sample of \ntot stars, including six binaries, from new and improved Keck/DEIMOS spectroscopy and {\it Gaia} astrometry (\S\ref{sec_data}, \S\ref{ssec:membership}). We measure the physical properties of W1 from the \nmem of these stars out to 3 half-light radii.}
+    \item We measure a systemic velocity of $v_{\rm sys} = \vsys$ \kms~ and a velocity dispersion of $\sigma_v = \vdisp$ \kms~ based on a two-component Gaussian mixture model (\S\ref{ssec:vel_mass}). If W1 is in equilibrium, this implies a dynamical mass of $\mass\Msun$ and a mass-to-light ratio of $(M/L)_V = \ml$.
+    \item {\color{red} We measure an average metallicity of ${\rm [Fe/H]} = \met$ and metallicity dispersion $\sigma_{\rm [Fe/H]} = \metdisp$ dex from eight member stars with CaT-based metallicity measurements (\S\ref{ssec:met}).} 
+    \item We conclude that W1 is a dwarf galaxy based on its dynamical mass-to-light ratio (\S\ref{ssec:vel_mass}), observed metallicity spread (\S\ref{ssec:met}), lack of mass segregation within $\sim 1\rell$ (\S\ref{ssec:mass_seg_analysis}), and position on the size-luminosity plane (\S\ref{ssec:dwarf}).
+    \item Evidence for tidal disruption outweighs evidence against tidal disruption (\S\ref{ssec:tidal}). While W1 is quite dense, we find that our best-fit orbital solution (\S\ref{ssec:orbit}) and comparison with our simulations of tidal streams (\S\ref{ssec:streams}) indicate a sustained passage near the Milky Way over the course of its orbit. This history could explain W1's elliptical shape, asymmetric velocity distribution (\S\ref{ssec:vel_mass}), and offset on the luminosity-metallicity plane. 
+    \item We {\color{red} therefore} caution that the internal velocity dispersion of W1 may not accurately reflect the dynamical mass of the system. The true dynamical nature of W1 may be better understood through deeper wide-field imaging and spectroscopy as well as more detailed dynamical modeling to assess the validity and use of equilibrium models. 
+\end{itemize}
+
+Looking ahead, the upcoming Vera C. Rubin Observatory's Legacy Survey of Space and Time (LSST) is anticipated to uncover a population of similarly faint, distant, and low luminosity Local Group satellites. Many of these objects are likely to resemble W1, with sparse red giant branches, uncertain membership, and properties that blur the line between star clusters and dwarf galaxies. {\color{red} Accurate characterization will require} extensive spectroscopic follow-up in order to secure clean member samples, {\color{red} enabling precise} kinematic and chemical measurements. By developing the tools needed to {\color{red} study} these systems, we are better equipped to understand the satellites LSST will reveal and their place in the broader Local Group satellite population. From this, we can more comprehensively {\color{red} test} the predictions of cosmological models and {\color{red} probe} the processes that govern galaxy formation, evolution, and structure on the smallest scales.
+
+\begin{acknowledgements}
+
+{\color{red} We thank the anonymous referee for their suggestions on our manuscript that improved this work. We also thank Yasmeen Asali and Sebastian Monzon for their insightful comments. We thank Ricardo Mu{\~n}oz for making his raw Megacam photometric catalogs available.}
+
+This research has made extensive use of the Keck Observatory Archive (KOA), which is operated by the W. M. Keck Observatory and the NASA Exoplanet Science Institute (NExScI), under contract with the National Aeronautics and Space Administration. 
+
+This work has made use of data from the European Space Agency (ESA) mission Gaia\footnote{\url{https://www.cosmos.esa.int/gaia}}, processed by the Gaia Data Processing and Analysis Consortium (DPAC\footnote{\url{https://www.cosmos.esa.int/web/gaia/dpac/consortium}}). Funding for the DPAC has been provided by national institutions, in particular the institutions participating in the Gaia Multilateral Agreement. 
+
+\end{acknowledgements}
+
+\software{This research made use of many community-developed or community-maintained software packages, including (in alphabetical order): Astropy \citep{astropy}, Emcee \citep{emcee}, gala \citep{gala}, galpy \citep{galpy}, IPython \citep{ipython}, Jupyter (\hyperlink{jupyter.org}{jupyter.org}), Matplotlib \citep{matplotlib}, NumPy \citep{numpy}, pandas \citep{pandas}, photutils \citep{photutils}, SciPy \citep{scipy}. This research has also made use of NASA's Astrophysics Data System.}
+
+\facility{Gaia, Keck:II (DEIMOS)}
+
+% Bibliography
+\bibliography{bib_wil1,software}
+\bibliographystyle{mnras}
+
+% Appendices
+\appendix
+
+\renewcommand{\thetable}{A\arabic{table}}
+
+\section{Details of stars used in our analysis}
+
+Table \ref{tab:members} present the properties of the 73 stars used in our analysis, including the \ntot stars in our member sample (\S\ref{ssec:final_members}; $P_{\rm mem} > 0.5$) and the \nmix stars used in our mixture model (\S\ref{ssec:vel_mass}; $P_{\rm mem, nov} > 0.1$, $\rell < 3$, Var $\neq 1$). We refer the reader to \citet{geha_paper1} for a detailed discussion of the data reduction. The full table of stars, including non-members, is available in Table A3 of \citet{geha_paper1}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Table: Member table
+\startlongtable
+\begin{deluxetable*}{cccccccccccccc}
+\tablewidth{\columnwidth}
+\tabletypesize{\footnotesize}
+\tablecaption{Measured properties of Keck/DEIMOS stars used in our analysis. \label{tab:members}}
+\tablehead{\colhead{RA} & \colhead{DEC} & \colhead{$v$} & \colhead{$v_{\rm err}$} & \colhead{$r_o$} & \colhead{$r_{\rm err}$} & \colhead{$g_o$} & \colhead{$g_{\rm err}$} & \colhead{[Fe/H]} & \colhead{[Fe/H]$_{\rm err}$} & \colhead{gaia\_source\_id} & \colhead{Var} & \colhead{$P_{\rm mem}$} & \colhead{Sample} \\
+\colhead{[deg]} & \colhead{[deg]} & \colhead{[km/s]} & \colhead{[km/s]} & \colhead{[mag]} & \colhead{[mag]} & \colhead{[mag]} & \colhead{[mag]} & \colhead{--} & \colhead{dex} & \colhead{--} & \colhead{--} & \colhead{--} & \colhead{--}}
+\startdata
+\hline
+\input{member_table_paper.tex}
+\enddata
+% \tablecomments{}
+\end{deluxetable*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+
+
+
